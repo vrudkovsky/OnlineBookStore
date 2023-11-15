@@ -1,8 +1,8 @@
 package com.vpcomtek.onlinebookstore.repository;
 
 import com.vpcomtek.onlinebookstore.model.Book;
-import org.springframework.stereotype.Repository;
 import java.util.List;
+import org.springframework.stereotype.Repository;
 
 @Repository
 public class BookRepositoryImpl implements BookRepository {

@@ -5,25 +5,25 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import lombok.Data;
 import java.math.BigDecimal;
+import lombok.Data;
 
 @Entity
 @Data
 public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
+    private Long id;
     @Column(nullable = false)
-    String title;
+    private String title;
     @Column(nullable = false)
-    String author;
+    private String author;
     @Column(nullable = false, unique = true)
-    String isbn;
+    private String isbn;
     @Column(nullable = false)
-    BigDecimal price;
+    private BigDecimal price;
     @Column
-    String description;
+    private String description;
     @Column(name = "cover_image")
-    String coverImage;
+    private String coverImage;
 }
