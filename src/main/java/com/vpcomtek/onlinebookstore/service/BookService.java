@@ -5,9 +5,9 @@ import com.vpcomtek.onlinebookstore.dto.CreateBookRequestDto;
 import java.util.List;
 
 public interface BookService {
-    BookDto save(CreateBookRequestDto requestDto);
+    BookDto createBook(CreateBookRequestDto requestDto);
 
-    List<BookDto> findAll();
+    List<BookDto> getAll();
 
-    BookDto findById(Long id);
+    BookDto getBookById(Long id);
 }

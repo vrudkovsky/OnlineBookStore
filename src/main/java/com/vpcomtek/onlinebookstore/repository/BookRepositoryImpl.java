@@ -15,7 +15,7 @@ public class BookRepositoryImpl implements BookRepository {
     private final EntityManagerFactory entityManagerFactory;
 
     @Override
-    public Book save(Book book) {
+    public Book createBook(Book book) {
         EntityTransaction transaction = null;
         try (EntityManager entityManager = entityManagerFactory.createEntityManager()) {
             transaction = entityManager.getTransaction();
@@ -33,7 +33,7 @@ public class BookRepositoryImpl implements BookRepository {
     }
 
     @Override
-    public Optional<Book> findById(Long id) {
+    public Optional<Book> findBookById(Long id) {
         try (EntityManager entityManager = entityManagerFactory.createEntityManager()) {
             Book book = entityManager.find(Book.class, id);
             return Optional.ofNullable(book);

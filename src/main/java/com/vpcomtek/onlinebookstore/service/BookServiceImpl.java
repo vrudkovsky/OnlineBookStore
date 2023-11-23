@@ -17,22 +17,22 @@ public class BookServiceImpl implements BookService {
     private final BookMapper bookMapper;
 
     @Override
-    public BookDto save(CreateBookRequestDto requestDto) {
+    public BookDto createBook(CreateBookRequestDto requestDto) {
         Book book = bookMapper.toModel(requestDto);
-        Book savedBook = bookRepository.save(book);
+        Book savedBook = bookRepository.createBook(book);
         return bookMapper.toDto(savedBook);
     }
 
     @Override
-    public List<BookDto> findAll() {
+    public List<BookDto> getAll() {
         return bookRepository.findAll().stream()
                 .map(bookMapper::toDto)
                 .toList();
     }
 
     @Override
-    public BookDto findById(Long id) {
-        Book book = bookRepository.findById(id).orElseThrow(
+    public BookDto getBookById(Long id) {
+        Book book = bookRepository.findBookById(id).orElseThrow(
                 () -> new EntityNotFoundException("Cant' find book by id: " + id)
         );
         return bookMapper.toDto(book);
