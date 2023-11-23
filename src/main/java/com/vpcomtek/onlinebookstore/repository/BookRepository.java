@@ -2,9 +2,12 @@ package com.vpcomtek.onlinebookstore.repository;
 
 import com.vpcomtek.onlinebookstore.model.Book;
 import java.util.List;
+import java.util.Optional;
 
 public interface BookRepository {
-    Book save(Book book);
+    Book createBook(Book book);
 
-    List findAll();
+    Optional<Book> findBookById(Long id);
+
+    List<Book> findAll();
 }
