@@ -14,19 +14,19 @@ import org.springframework.stereotype.Service;
 @AllArgsConstructor
 public class BookServiceImpl implements BookService {
     private final BookRepository bookRepository;
-    private final BookMapper bookMapper;
+    private final BookMapper mapper;
 
     @Override
     public BookDto createBook(CreateBookRequestDto requestDto) {
-        Book book = bookMapper.toModel(requestDto);
+        Book book = mapper.toModel(requestDto);
         Book savedBook = bookRepository.save(book);
-        return bookMapper.toDto(savedBook);
+        return mapper.toDto(savedBook);
     }
 
     @Override
     public List<BookDto> getAll() {
         return bookRepository.findAll().stream()
-                .map(bookMapper::toDto)
+                .map(mapper::toDto)
                 .toList();
     }
 
@@ -35,7 +35,17 @@ public class BookServiceImpl implements BookService {
         Book book = bookRepository.findById(id).orElseThrow(
                 () -> new EntityNotFoundException("Cant' find book by id: " + id)
         );
-        return bookMapper.toDto(book);
+        return mapper.toDto(book);
+    }
+
+    @Override
+    public BookDto updateBook(Long id, CreateBookRequestDto requestDto) {
+        if (bookRepository.existsById(id)) {
+            Book book = mapper.toModel(requestDto);
+            book.setId(id);
+            return mapper.toDto(bookRepository.save(book));
+        }
+        throw new EntityNotFoundException("Book by id: " + id + " was not found");
     }
 
     @Override
