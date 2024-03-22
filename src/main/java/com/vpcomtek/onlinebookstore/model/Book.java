@@ -8,12 +8,12 @@ import jakarta.persistence.Id;
 import java.math.BigDecimal;
 import lombok.Data;
 import org.hibernate.annotations.SQLDelete;
-import org.hibernate.annotations.SQLRestriction;
+import org.hibernate.annotations.Where;
 
 @Entity
 @Data
-@SQLDelete(sql = "UPDATE book SET is_deleted = TRUE WHERE id = ?")
-@SQLRestriction("is_deleted = FALSE")
+@SQLDelete(sql = "UPDATE book SET is_deleted = true WHERE id=?")
+@Where(clause = "is_deleted=false")
 public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
