@@ -49,7 +49,7 @@ public class BookController {
         bookService.deleteById(id);
     }
 
-    @GetMapping
+    @GetMapping("/search")
     public List<BookDto> search(BookSearchParameters searchParameters) {
         return bookService.search(searchParameters);
     }
