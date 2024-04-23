@@ -1,6 +1,7 @@
 package com.vpcomtek.onlinebookstore.controller;
 
 import com.vpcomtek.onlinebookstore.dto.BookDto;
+import com.vpcomtek.onlinebookstore.dto.BookSearchParameters;
 import com.vpcomtek.onlinebookstore.dto.CreateBookRequestDto;
 import com.vpcomtek.onlinebookstore.service.BookService;
 import java.util.List;
@@ -46,5 +47,10 @@ public class BookController {
     @DeleteMapping("{id}")
     public void delete(@PathVariable Long id) {
         bookService.deleteById(id);
+    }
+
+    @GetMapping
+    public List<BookDto> search(BookSearchParameters searchParameters) {
+        return bookService.search(searchParameters);
     }
 }
