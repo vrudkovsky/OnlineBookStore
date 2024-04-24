@@ -1,13 +1,16 @@
 package com.vpcomtek.onlinebookstore.service;
 
 import com.vpcomtek.onlinebookstore.dto.BookDto;
+import com.vpcomtek.onlinebookstore.dto.BookSearchParameters;
 import com.vpcomtek.onlinebookstore.dto.CreateBookRequestDto;
 import com.vpcomtek.onlinebookstore.exception.EntityNotFoundException;
 import com.vpcomtek.onlinebookstore.mapper.BookMapper;
 import com.vpcomtek.onlinebookstore.model.Book;
 import com.vpcomtek.onlinebookstore.repository.BookRepository;
+import com.vpcomtek.onlinebookstore.repository.BookSpecificationBuilder;
 import java.util.List;
 import lombok.AllArgsConstructor;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -15,6 +18,8 @@ import org.springframework.stereotype.Service;
 public class BookServiceImpl implements BookService {
     private final BookRepository bookRepository;
     private final BookMapper mapper;
+    private final BookSpecificationBuilder bookSpecificationBuilder;
+    private final BookMapper bookMapper;
 
     @Override
     public BookDto createBook(CreateBookRequestDto requestDto) {
@@ -51,5 +56,13 @@ public class BookServiceImpl implements BookService {
     @Override
     public void deleteById(Long id) {
         bookRepository.deleteById(id);
+    }
+
+    @Override
+    public List<BookDto> search(BookSearchParameters searchParameters) {
+        Specification<Book> bookSpecification = bookSpecificationBuilder.build(searchParameters);
+        return bookRepository.findAll(bookSpecification).stream()
+                .map(bookMapper::toDto)
+                .toList();
     }
 }
