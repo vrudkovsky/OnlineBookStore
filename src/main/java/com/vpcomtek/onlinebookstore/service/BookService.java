@@ -1,13 +1,22 @@
 package com.vpcomtek.onlinebookstore.service;
 
 import com.vpcomtek.onlinebookstore.dto.BookDto;
+import com.vpcomtek.onlinebookstore.dto.BookSearchParameters;
 import com.vpcomtek.onlinebookstore.dto.CreateBookRequestDto;
 import java.util.List;
+import org.springframework.data.domain.Pageable;
 
 public interface BookService {
     BookDto createBook(CreateBookRequestDto requestDto);
 
-    List<BookDto> getAll();
+    List<BookDto> getAll(Pageable pageable);
 
     BookDto getBookById(Long id);
+
+    BookDto updateBook(Long id, CreateBookRequestDto requestDto);
+
+    void deleteById(Long id);
+
+    List<BookDto> search(BookSearchParameters searchParameters);
+
 }

@@ -7,23 +7,36 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import java.math.BigDecimal;
 import lombok.Data;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.SQLRestriction;
 
 @Entity
 @Data
+@SQLDelete(sql = "UPDATE book SET is_deleted = TRUE WHERE id = ?")
+@SQLRestriction("is_deleted = FALSE")
 public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @Column(nullable = false)
     private String title;
+
     @Column(nullable = false)
     private String author;
+
     @Column(nullable = false, unique = true)
     private String isbn;
+
     @Column(nullable = false)
     private BigDecimal price;
+
     @Column
     private String description;
+
     @Column(name = "cover_image")
     private String coverImage;
+
+    @Column(nullable = false)
+    private boolean isDeleted = false;
 }
