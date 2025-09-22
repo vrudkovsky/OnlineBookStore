@@ -3,6 +3,7 @@ package com.vpcomtek.onlinebookstore.validation;
 import com.vpcomtek.onlinebookstore.annotation.FieldMatch;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
+import java.util.Objects;
 import org.springframework.beans.BeanWrapperImpl;
 
 public class PasswordMatchValidator implements ConstraintValidator<FieldMatch, Object> {
@@ -22,12 +23,6 @@ public class PasswordMatchValidator implements ConstraintValidator<FieldMatch, O
         Object repeatPasswordValue = new BeanWrapperImpl(value)
                 .getPropertyValue(repeatPasswordField);
 
-        if (passwordValue == null && repeatPasswordValue == null) {
-            return true;
-        }
-        if (passwordValue == null || repeatPasswordValue == null) {
-            return false;
-        }
-        return passwordValue.equals(repeatPasswordValue);
+        return Objects.equals(passwordValue, repeatPasswordValue);
     }
 }
