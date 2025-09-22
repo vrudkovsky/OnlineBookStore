@@ -1,0 +1,49 @@
+databaseChangeLog:
+  - changeSet:
+      id: insert-mock-users
+      author: vrudkovsky
+      changes:
+        - insert:
+            tableName: users
+            columns:
+              - column: {name: email, value: "alice@example.com"}
+              - column: {name: password, value: "password123"}
+              - column: {name: first_name, value: "Alice"}
+              - column: {name: last_name, value: "Smith"}
+              - column: {name: shipping_address, value: "123 Main St, Springfield"}
+
+        - insert:
+            tableName: users
+            columns:
+              - column: {name: email, value: "bob@example.com"}
+              - column: {name: password, value: "password123"}
+              - column: {name: first_name, value: "Bob"}
+              - column: {name: last_name, value: "Johnson"}
+              - column: {name: shipping_address, value: "456 Elm St, Springfield"}
+
+        - insert:
+            tableName: users
+            columns:
+              - column: {name: email, value: "carol@example.com"}
+              - column: {name: password, value: "password123"}
+              - column: {name: first_name, value: "Carol"}
+              - column: {name: last_name, value: "Williams"}
+              - column: {name: shipping_address, value: "789 Oak St, Springfield"}
+
+        - insert:
+            tableName: users
+            columns:
+              - column: {name: email, value: "dave@example.com"}
+              - column: {name: password, value: "password123"}
+              - column: {name: first_name, value: "Dave"}
+              - column: {name: last_name, value: "Brown"}
+              - column: {name: shipping_address, value: "101 Pine St, Springfield"}
+
+        - insert:
+            tableName: users
+            columns:
+              - column: {name: email, value: "eve@example.com"}
+              - column: {name: password, value: "password123"}
+              - column: {name: first_name, value: "Eve"}
+              - column: {name: last_name, value: "Davis"}
+              - column: {name: shipping_address, value: "202 Maple St, Springfield"}
