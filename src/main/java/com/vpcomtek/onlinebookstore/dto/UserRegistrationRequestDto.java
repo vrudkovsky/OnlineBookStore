@@ -22,12 +22,13 @@ public class UserRegistrationRequestDto {
     private String repeatPassword;
 
     @Length(max = 25)
+    @NotBlank
     private String firstName;
 
     @Length(max = 25)
+    @NotBlank
     private String lastName;
 
-    @NotBlank
     @Length(min = 5, max = 100)
     private String shippingAddress;
 }
