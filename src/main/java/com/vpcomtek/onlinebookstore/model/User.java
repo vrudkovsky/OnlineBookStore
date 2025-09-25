@@ -8,10 +8,12 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.SQLDelete;
 
 @Getter
 @Setter
 @Entity
+@SQLDelete(sql = "UPDATE users SET is_deleted = TRUE WHERE id = ?")
 @Table(name = "users")
 public class User {
 
@@ -31,7 +33,9 @@ public class User {
     @Column(nullable = false)
     private String lastName;
 
-    @Column(nullable = false)
     private String shippingAddress;
+
+    @Column(nullable = false)
+    private boolean isDeleted = false;
 
 }

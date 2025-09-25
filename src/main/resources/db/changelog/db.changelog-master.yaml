@@ -7,3 +7,5 @@ databaseChangeLog:
       file: db/changelog/changes/v03-insert-mock-books.yaml
   - include:
       file: db/changelog/changes/v04-insert-mock-users.yaml
+  - include:
+      file: db/changelog/changes/v05-add-column-isDeleted-users.yaml
