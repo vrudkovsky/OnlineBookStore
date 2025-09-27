@@ -2,14 +2,16 @@ openapi: 3.0.1
 info:
   title: Online Book Store API
   version: 1.0.0
-  description: Endpoints for managing books
+  description: Endpoints for managing books and users
 
 servers:
-  - url: http://localhost:8080
+  - url: http://localhost:8080/api
 
 tags:
   - name: Book management
     description: Endpoints for managing books
+  - name: User management
+    description: Endpoints for managing users
 
 paths:
   /books:
@@ -136,7 +138,6 @@ paths:
           required: false
           schema:
             type: string
-        # Додайте інші параметри, які є в BookSearchParameters
       responses:
         '200':
           description: List of matching books
@@ -146,6 +147,29 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/BookDto'
+
+  /auth/registration:
+    post:
+      tags: [User management]
+      summary: Register a new user
+      description: API endpoint for registering a new user account
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserRegistrationRequestDto'
+      responses:
+        '201':
+          description: User successfully registered
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserResponseDto'
+        '400':
+          description: Invalid input data
+        '409':
+          description: User with given email already exists
 
 components:
   schemas:
@@ -188,3 +212,36 @@ components:
         coverImage:
           type: string
       required: [id, title, author, isbn, price]
+
+    UserRegistrationRequestDto:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+        password:
+          type: string
+          format: password
+        firstName:
+          type: string
+        lastName:
+          type: string
+        shippingAddress:
+          type: string
+      required: [email, password, firstName, lastName]
+
+    UserResponseDto:
+      type: object
+      properties:
+        id:
+          type: integer
+        email:
+          type: string
+          format: email
+        firstName:
+          type: string
+        lastName:
+          type: string
+        shippingAddress:
+          type: string
+      required: [id, email, firstName, lastName]
